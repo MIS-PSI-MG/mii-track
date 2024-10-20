@@ -1,0 +1,83 @@
+<mat-toolbar class="bg-light">
+  <span class="col-4">Lot: {{ tracking.lot() }}</span>
+  <span class="col-4">Ballot: {{ tracking.isa() }}</span>
+  <span class="col-4">Total: {{ tracking.total() }}</span>
+</mat-toolbar>
+<div class="container">
+  <h4>Saisie</h4>
+
+  <form (ngSubmit)="submit()" [formGroup]="userForm">
+    <div class="row mb-3">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Entrée/Sortie</mat-label>
+        <mat-select formControlName="operation">
+          @for (operation of typeOperations; track operation.id) {
+          <mat-option value="type.option">{{ operation.option }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>Type obligatoire</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row mb-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Code</mat-label>
+        <input matInput formControlName="code" #codeInput />
+        <mat-error>Code obligatoire</mat-error>
+      </mat-form-field>
+    </div>
+    <!-- lot -->
+    <div class="row mb-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Lot</mat-label>
+        <input matInput formControlName="lot" />
+        <mat-error>Lot obligatoire</mat-error>
+      </mat-form-field>
+    </div>
+    <!-- destination -->
+    <div class="row mb-3">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Destination</mat-label>
+        <input
+          type="text"
+          placeholder="Pick one"
+          aria-label="Number"
+          matInput
+          formControlName="destination"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete #auto="matAutocomplete">
+          @for (option of filteredDestinations | async; track option.id) {
+          <mat-option [value]="option.option">{{ option.option }}</mat-option>
+          }
+        </mat-autocomplete>
+        <mat-error>Destination obligatoire</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row mb-3">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Caractéristique</mat-label>
+        <mat-select formControlName="caracteristique">
+          @for (type of typeCaracteristiques; track type.id) {
+          <mat-option value="type.option">{{ type.option }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>Caractéristique obligatoire</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <button
+          type="submit"
+          mat-flat-button
+          [disabled]="userForm.invalid"
+          class="accent"
+        >
+          ENREGISTRER
+        </button>
+      </div>
+      <div class="col-4">
+        <button mat-flat-button color="secondary">RETOUR</button>
+      </div>
+    </div>
+  </form>
+</div>
