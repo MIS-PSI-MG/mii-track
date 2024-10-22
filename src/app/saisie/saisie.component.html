@@ -12,10 +12,12 @@
         <mat-label>Entrée/Sortie</mat-label>
         <mat-select formControlName="operation">
           @for (operation of typeOperations; track operation.id) {
-          <mat-option value="type.option">{{ operation.option }}</mat-option>
+            <mat-option [value]="operation.option">{{
+              operation.option
+            }}</mat-option>
           }
         </mat-select>
-        <mat-error>Type obligatoire</mat-error>
+        <mat-error>Opération obligatoire</mat-error>
       </mat-form-field>
     </div>
     <div class="row mb-3">
@@ -47,7 +49,7 @@
         />
         <mat-autocomplete #auto="matAutocomplete">
           @for (option of filteredDestinations | async; track option.id) {
-          <mat-option [value]="option.option">{{ option.option }}</mat-option>
+            <mat-option [value]="option.option">{{ option.option }}</mat-option>
           }
         </mat-autocomplete>
         <mat-error>Destination obligatoire</mat-error>
@@ -57,13 +59,28 @@
       <mat-form-field appearance="outline" color="primary">
         <mat-label>Caractéristique</mat-label>
         <mat-select formControlName="caracteristique">
-          @for (type of typeCaracteristiques; track type.id) {
-          <mat-option value="type.option">{{ type.option }}</mat-option>
+          @for (typec of typeCaracteristiques; track typec.id) {
+            <mat-option [value]="typec.option">{{ typec.option }}</mat-option>
           }
         </mat-select>
         <mat-error>Caractéristique obligatoire</mat-error>
       </mat-form-field>
     </div>
+    <div class="row mb-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Quantité</mat-label>
+        <input matInput formControlName="quantite" type="number" />
+        <mat-error>Quantité obligatoire</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row mb-3">
+      <mat-form-field appearance="outline">
+        <mat-label>Numéro camion</mat-label>
+        <input matInput formControlName="numCamion" />
+        <mat-error>Numéro camion obligatoire</mat-error>
+      </mat-form-field>
+    </div>
+    <input type="hidden" formControlName="dateSub" />
     <div class="row">
       <div class="col-4">
         <button
@@ -76,7 +93,7 @@
         </button>
       </div>
       <div class="col-4">
-        <button mat-flat-button color="secondary">RETOUR</button>
+        <button mat-flat-button color="secondary" routerLink="/">RETOUR</button>
       </div>
     </div>
   </form>

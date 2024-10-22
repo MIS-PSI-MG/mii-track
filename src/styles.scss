@@ -9,7 +9,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-$primary: #384f8e;
+$primary: #384F8E;
 $light-primary: #c8d3e6;
 $background: white;
 $primary-text: black;
@@ -30,4 +30,7 @@ $primary-text: black;
 
 .accent:disabled {
   background-color: lightgrey !important;
+}
+.spacer {
+  flex: 1 1 auto;
 }
